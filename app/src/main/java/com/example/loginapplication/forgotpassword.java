@@ -1,3 +1,5 @@
+package com.example.loginapplication;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,16 +13,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends AppCompatActivity {
+public class forgotpassword extends AppCompatActivity {
 
     // variable for FirebaseAuth class
     private FirebaseAuth mAuth;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_forgotpassword);
 
         // below line is for getting instance
         // of our FirebaseAuth.
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(edtPhone.getText().toString())) {
                     // when mobile number text field is empty
                     // displaying a toast message.
-                    Toast.makeText(MainActivity.this, "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(forgotpassword.this, "Please enter a valid phone number.", Toast.LENGTH_SHORT).show();
                 } else {
                     // if the text field is not empty we are calling our
                     // send OTP method for getting OTP from Firebase.
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(edtOTP.getText().toString())) {
                     // if the OTP text field is empty display
                     // a message to user to enter OTP
-                    Toast.makeText(MainActivity.this, "Please enter OTP", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(forgotpassword.this, "Please enter OTP", Toast.LENGTH_SHORT).show();
                 } else {
                     // if OTP field is not empty calling
                     // method to verify the OTP.
@@ -98,13 +100,13 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // if the code is correct and the task is successful
                             // we are sending our user to new activity.
-                            Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                            Intent i = new Intent(forgotpassword.this, HomeActivity.class);
                             startActivity(i);
                             finish();
                         } else {
                             // if the code is not correct then we are
                             // displaying an error message to the user.
-                            Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(forgotpassword.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -171,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onVerificationFailed(FirebaseException e) {
             // displaying error message with firebase exception.
-            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(forgotpassword.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     };
 
